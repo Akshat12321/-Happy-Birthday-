@@ -11,6 +11,7 @@
       overflow: hidden;
       font-family: 'Segoe UI', sans-serif;
       height: 100vh;
+      position: relative;
     }
 
     h1 {
@@ -36,7 +37,17 @@
       z-index: 10;
       color: #ff0066;
       font-weight: bold;
-      background: transparent;
+    }
+
+    .safe-zone {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 600px;
+      height: 400px;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      pointer-events: none;
     }
 
     .heart {
@@ -111,40 +122,34 @@
     </p>
   </div>
 
+  <div class="safe-zone" id="no-heart-zone"></div>
+
   <script>
     window.addEventListener("load", () => {
-      const heartCount = 150;
-      const safeZone = {
-        x: window.innerWidth / 2 - 300,
-        y: window.innerHeight / 2 - 200,
-        width: 600,
-        height: 400
-      };
+      const heartCount = 200;
+      const safeZone = document.getElementById("no-heart-zone").getBoundingClientRect();
 
       for (let i = 0; i < heartCount; i++) {
-        let x, y, isSafe = false;
+        let x, y;
+        let safe = false;
 
-        while (!isSafe) {
-          x = Math.random() * window.innerWidth - window.innerWidth / 2;
-          y = Math.random() * window.innerHeight - window.innerHeight / 2;
+        while (!safe) {
+          x = Math.random() * window.innerWidth;
+          y = Math.random() * window.innerHeight;
 
-          const absX = x + window.innerWidth / 2;
-          const absY = y + window.innerHeight / 2;
-
+          // Only allow heart if it's outside the message safe-zone
           if (
-            absX < safeZone.x ||
-            absX > safeZone.x + safeZone.width ||
-            absY < safeZone.y ||
-            absY > safeZone.y + safeZone.height
+            x < safeZone.left || x > safeZone.right ||
+            y < safeZone.top || y > safeZone.bottom
           ) {
-            isSafe = true;
+            safe = true;
           }
         }
 
         const heart = document.createElement("div");
         heart.classList.add("heart");
-        heart.style.setProperty('--x', `${x}px`);
-        heart.style.setProperty('--y', `${y}px`);
+        heart.style.setProperty('--x', `${x - window.innerWidth / 2}px`);
+        heart.style.setProperty('--y', `${y - window.innerHeight / 2}px`);
         document.body.appendChild(heart);
       }
     });
@@ -152,4 +157,6 @@
 </body>
 </html>
 
+
+ 
 

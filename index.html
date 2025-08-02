@@ -39,14 +39,13 @@
       font-weight: bold;
     }
 
-    .safe-zone {
+    .hearts-container {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 600px;
-      height: 400px;
-      transform: translate(-50%, -50%);
-      z-index: 5;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* behind the text */
       pointer-events: none;
     }
 
@@ -60,7 +59,6 @@
       transform: rotate(45deg);
       animation: float 3s ease-out forwards, glow 2s infinite alternate;
       opacity: 1;
-      z-index: 1;
       box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
     }
 
@@ -122,41 +120,24 @@
     </p>
   </div>
 
-  <div class="safe-zone" id="no-heart-zone"></div>
+  <div class="hearts-container" id="hearts-container"></div>
 
   <script>
     window.addEventListener("load", () => {
       const heartCount = 200;
-      const safeZone = document.getElementById("no-heart-zone").getBoundingClientRect();
+      const container = document.getElementById("hearts-container");
 
       for (let i = 0; i < heartCount; i++) {
-        let x, y;
-        let safe = false;
-
-        while (!safe) {
-          x = Math.random() * window.innerWidth;
-          y = Math.random() * window.innerHeight;
-
-          // Only allow heart if it's outside the message safe-zone
-          if (
-            x < safeZone.left || x > safeZone.right ||
-            y < safeZone.top || y > safeZone.bottom
-          ) {
-            safe = true;
-          }
-        }
+        const x = Math.random() * window.innerWidth - window.innerWidth / 2;
+        const y = Math.random() * window.innerHeight - window.innerHeight / 2;
 
         const heart = document.createElement("div");
         heart.classList.add("heart");
-        heart.style.setProperty('--x', `${x - window.innerWidth / 2}px`);
-        heart.style.setProperty('--y', `${y - window.innerHeight / 2}px`);
-        document.body.appendChild(heart);
+        heart.style.setProperty('--x', `${x}px`);
+        heart.style.setProperty('--y', `${y}px`);
+        container.appendChild(heart);
       }
     });
   </script>
 </body>
 </html>
-
-
- 
-

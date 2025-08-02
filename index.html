@@ -15,32 +15,32 @@
     }
 
     h1 {
-  position: absolute;
-  top: 30px;
-  width: 100%;
-  text-align: center;
-  font-size: 3em;
-  color: #b30059; /* Darker pink for better visibility */
-  z-index: 10;
-  text-shadow: 2px 2px white;
-}
+      position: absolute;
+      top: 30px;
+      width: 100%;
+      text-align: center;
+      font-size: 3em;
+      color: #b30059; /* Darker pink */
+      z-index: 10;
+      text-shadow: 2px 2px white;
+    }
 
-.message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 60%;
-  padding: 30px;
-  text-align: center;
-  font-size: 1.3em;
-  z-index: 10;
-  color: #660033; /* Dark wine color for better readability */
-  font-weight: bold;
-  line-height: 1.6;
-  background-color: rgba(255, 230, 240, 0.9); /* Slightly stronger contrast */
-  border-radius: 20px;
-}
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 60%;
+      padding: 30px;
+      text-align: center;
+      font-size: 1.3em;
+      z-index: 10;
+      color: #660033; /* Dark wine */
+      font-weight: bold;
+      line-height: 1.6;
+      background-color: rgba(255, 230, 240, 0.9); /* More contrast */
+      border-radius: 20px;
+    }
 
     .hearts-container {
       position: absolute;
@@ -131,19 +131,17 @@
         const heart = document.createElement("div");
         heart.classList.add("heart");
 
-      
-        // Position hearts randomly across the full width
-const x = Math.random() * window.innerWidth;
-
-        const y = Math.random() * -window.innerHeight; // start above
+        // Random X across entire width
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * -window.innerHeight; // start above the screen
 
         heart.style.left = `${x}px`;
         heart.style.top = `${y}px`;
         heart.style.animationDelay = `${Math.random() * 8}s`;
+
         container.appendChild(heart);
       }
     });
   </script>
 </body>
 </html>
-

@@ -30,7 +30,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      max-width: 80%;
+      max-width: 60%;
       padding: 30px;
       text-align: center;
       font-size: 1.3em;
@@ -38,6 +38,8 @@
       color: #ff0066;
       font-weight: bold;
       line-height: 1.6;
+      background-color: rgba(255, 230, 240, 0.7);
+      border-radius: 20px;
     }
 
     .hearts-container {
@@ -55,12 +57,9 @@
       height: 20px;
       background: red;
       position: absolute;
-      top: 50%;
-      left: 50%;
       transform: rotate(45deg);
-      animation: float 3s ease-out forwards, glow 2s infinite alternate;
-      opacity: 1;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+      animation: float 8s linear infinite, glow 2s infinite alternate;
+      opacity: 0.8;
     }
 
     .heart::before,
@@ -85,15 +84,15 @@
 
     @keyframes float {
       0% {
-        transform: translate(-50%, -50%) scale(0.5) rotate(45deg);
-        opacity: 0;
+        transform: translateY(0) rotate(45deg);
+        opacity: 0.7;
       }
       50% {
         opacity: 1;
       }
       100% {
-        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1) rotate(45deg);
-        opacity: 1;
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0.5;
       }
     }
 
@@ -125,20 +124,28 @@
 
   <script>
     window.addEventListener("load", () => {
-      const heartCount = 200;
+      const heartCount = 80;
       const container = document.getElementById("hearts-container");
 
       for (let i = 0; i < heartCount; i++) {
-        const x = Math.random() * window.innerWidth - window.innerWidth / 2;
-        const y = Math.random() * window.innerHeight - window.innerHeight / 2;
-
         const heart = document.createElement("div");
         heart.classList.add("heart");
-        heart.style.setProperty('--x', `${x}px`);
-        heart.style.setProperty('--y', `${y}px`);
+
+        // Position hearts only in the side areas (left 20% or right 20%)
+        const side = Math.random() < 0.5 ? 'left' : 'right';
+        const x = side === 'left'
+          ? Math.random() * (window.innerWidth * 0.15)
+          : window.innerWidth * 0.85 + Math.random() * (window.innerWidth * 0.15);
+
+        const y = Math.random() * -window.innerHeight; // start above
+
+        heart.style.left = `${x}px`;
+        heart.style.top = `${y}px`;
+        heart.style.animationDelay = `${Math.random() * 8}s`;
         container.appendChild(heart);
       }
     });
   </script>
 </body>
 </html>
+

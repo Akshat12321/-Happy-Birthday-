@@ -131,11 +131,9 @@
         const heart = document.createElement("div");
         heart.classList.add("heart");
 
-        // Position hearts only in the side areas (left 20% or right 20%)
-        const side = Math.random() < 0.5 ? 'left' : 'right';
-        const x = side === 'left'
-          ? Math.random() * (window.innerWidth * 0.15)
-          : window.innerWidth * 0.85 + Math.random() * (window.innerWidth * 0.15);
+      
+        // Position hearts randomly across the full width
+const x = Math.random() * window.innerWidth;
 
         const y = Math.random() * -window.innerHeight; // start above
 

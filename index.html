@@ -41,8 +41,8 @@
     .heart::before,
     .heart::after {
       content: "";
-      width: 10px;
-      height: 10px;
+      width: 20px;
+      height: 20px;
       background: red;
       position: absolute;
       border-radius: 50%;
@@ -74,7 +74,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: white;
+      background: pink;
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -101,7 +101,7 @@
 
   <script>
     // Create and animate hearts (no fade out now)
-    for (let i = 0; i < 70; i++) {
+    for (let i = 0; i < 200; i++) {
       const heart = document.createElement("div");
       heart.classList.add("heart");
       const x = Math.random() * window.innerWidth - window.innerWidth / 2;
